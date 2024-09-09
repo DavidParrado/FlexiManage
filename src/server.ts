@@ -1,6 +1,7 @@
 import express, { Application } from "express";
 import mongoose from "mongoose";
 import productoRoutes from "./routes/productos"; // Importar rutas
+import facturaRoutes from "./routes/productos";
 
 const app: Application = express();
 
@@ -14,6 +15,7 @@ mongoose
 app.use(express.json());
 
 app.use("/api/productos", productoRoutes); // Usar las rutas de productos
+app.use("/api/facturas", facturaRoutes); // Usar las rutas de facturas
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor corriendo en el puerto ${PORT}`));
