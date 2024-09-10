@@ -3,7 +3,7 @@ import mongoose, { Schema, Document } from "mongoose";
 // Definir interfaz para la Factura
 interface IFactura extends Document {
   numero: string;
-  cliente: string;
+  cliente: mongoose.Schema.Types.ObjectId;
   fecha: Date;
   productos: Array<{
     productoId: mongoose.Schema.Types.ObjectId;
@@ -15,7 +15,11 @@ interface IFactura extends Document {
 // Definir el esquema de la Factura
 const FacturaSchema: Schema = new Schema({
   numero: { type: String, required: true },
-  cliente: { type: String, required: true },
+  cliente: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Usuario",
+    required: true,
+  },
   fecha: { type: Date, default: Date.now },
   productos: [
     {

@@ -6,6 +6,7 @@ interface IUsuario extends Document {
   email: string;
   password: string;
   rol: "cliente" | "administrador";
+  telefono: string;
 }
 
 // Definir el esquema del Usuario
@@ -14,6 +15,7 @@ const UsuarioSchema: Schema = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   rol: { type: String, required: true, enum: ["cliente", "administrador"] },
+  telefono: { type: String, required: true },
 });
 
 // Exportar el modelo
