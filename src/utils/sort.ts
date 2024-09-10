@@ -42,3 +42,29 @@ export const quickSort = <T>(
   // Recursión: Ordenar los arreglos izquierdo y derecho, luego concatenar
   return [...quickSort(left, compare), pivot, ...quickSort(right, compare)];
 };
+
+// Función reutilizable de Selection Sort para cualquier tipo de arreglo
+export const selectionSort = <T>(arr: T[], compare: (a: T, b: T) => boolean): T[] => {
+  const sortedArray = [...arr];  // Crear una copia del arreglo para no mutar el original
+  
+  for (let i = 0; i < sortedArray.length - 1; i++) {
+    let minIndex = i;
+    
+    // Buscar el elemento mínimo en el resto del arreglo
+    for (let j = i + 1; j < sortedArray.length; j++) {
+      if (compare(sortedArray[minIndex], sortedArray[j])) {
+        minIndex = j;  // Actualizar índice del elemento mínimo
+      }
+    }
+    
+    // Intercambiar el elemento mínimo con el primer elemento desordenado
+    if (minIndex !== i) {
+      const temp = sortedArray[i];
+      sortedArray[i] = sortedArray[minIndex];
+      sortedArray[minIndex] = temp;
+    }
+  }
+
+  return sortedArray; // Retornar el arreglo ordenado
+};
+
