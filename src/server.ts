@@ -5,12 +5,16 @@ import productoRoutes from "./routes/productos";
 import facturaRoutes from "./routes/facturas";
 import usuarioRoutes from "./routes/usuarios";
 import proveedorRoutes from "./routes/proveedores";
+import dotenv from "dotenv";
+
+// Cargar variables de entorno desde .env
+dotenv.config();
 
 const app: Application = express();
 
 mongoose
   .connect(
-    "mongodb+srv://juandparrado04:8o2Bt2DxgfJXv2iA@fleximanage.vinmr.mongodb.net/?retryWrites=true&w=majority&appName=FlexiManage"
+    process.env.MONGODB_URL || "mongodb://localhost/inventario"
   )
   .then(() => console.log("Conectado a MongoDB"))
   .catch((err) => console.error("Error conectando a MongoDB", err));
