@@ -15,12 +15,13 @@ router.post("/", async (req: Request, res: Response) => {
       const producto = await Producto.findById(item.productoId);
       if (producto) {
         total += producto.precio * item.cantidad;
+        await Producto.findByIdAndUpdate(item.productoId, {
+          cantidad: producto.cantidad - item.cantidad,
+        });
       } else {
-        return res
-          .status(404)
-          .json({
-            message: `Producto con ID ${item.productoId} no encontrado`,
-          });
+        return res.status(404).json({
+          message: `Producto con ID ${item.productoId} no encontrado`,
+        });
       }
     }
 
@@ -69,11 +70,9 @@ router.put("/:id", async (req: Request, res: Response) => {
       if (producto) {
         total += producto.precio * item.cantidad;
       } else {
-        return res
-          .status(404)
-          .json({
-            message: `Producto con ID ${item.productoId} no encontrado`,
-          });
+        return res.status(404).json({
+          message: `Producto con ID ${item.productoId} no encontrado`,
+        });
       }
     }
 
