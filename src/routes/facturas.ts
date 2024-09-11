@@ -35,7 +35,7 @@ router.post("/", async (req: Request, res: Response) => {
 // Obtener todas las facturas
 router.get("/", async (req: Request, res: Response) => {
   try {
-    const facturas = await Factura.find().populate("productos.productoId");
+    const facturas = await Factura.find();
     res.json(facturas);
   } catch (error) {
     res.status(500).json({ message: "Error al obtener las facturas", error });
